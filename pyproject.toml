@@ -11,8 +11,13 @@ requires-python = ">=3.12"
 license = { text = "MIT" }
 keywords = ["obs", "wayland", "obs-studio", "compositors"]
 dependencies = [
+    "obsws-python>=1.8.0",
+    "python-dotenv>=1.0.0",
 ]
 dynamic = ["version"]
+
+[project.scripts]
+obs-keys = "obs_wayland:main"
 
 [project.optional-dependencies]
 dev = [
@@ -36,7 +41,7 @@ git_describe_command = ["git", "describe", "--dirty", "--tags", "--long", "--mat
 version-file = "_version.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["obs-wayland"]
+packages = ["obs_wayland"]
 
 [tool.hatch.build.targets.sdist]
 exclude = [
