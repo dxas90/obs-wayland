@@ -1,0 +1,89 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "obs-wayland"
+description = "obs-wayland tools to handle OBS Studio integration with Wayland compositors"
+readme = "README.md"
+authors = [{ name = "Daniel Ramirez", email = "dxas90@gmail.com" }]
+requires-python = ">=3.12"
+license = { text = "MIT" }
+keywords = ["obs", "wayland", "obs-studio", "compositors"]
+dependencies = [
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+
+]
+
+[dependency-groups]
+dev = [
+
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+version_scheme = "python-simplified-semver"
+local_scheme = "no-local-version"
+git_describe_command = ["git", "describe", "--dirty", "--tags", "--long", "--match", "v*"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["obs-wayland"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.github",
+    "/docs",
+    "/tests",
+    "/.git",
+    "/.gitignore",
+    "/.dockerignore",
+    "/.env.example",
+    "/Dockerfile",
+    "/mise.toml",
+    "/renovate.json5",
+    "/uv.lock",
+    "*.db",
+    "*.db-*",
+    "__pycache__",
+    "*.pyc",
+    ".pytest_cache",
+    "IMPLEMENTATION_COMPLETE.md",
+    "REFACTORING_COMPLETE.md",
+    "STATUS.md",
+    "TEST_ORGANIZATION_COMPLETE.md",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
