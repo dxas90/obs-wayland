@@ -39,6 +39,5 @@ home.sh
 ._*
 *_plan.txt
 
-!scripts
 # Auto-generated during builds
 _version.py
